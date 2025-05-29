@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Allocation Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #warning {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Memory Allocation Test</h1>
+        <p>Click the button below to allocate 16MB chunks of memory</p>
+        <button id="allocateBtn" onclick="allocateMemory()">Allocate 16MB</button>
+        <div id="status">Total Memory Allocated: 0 MB</div>
+        <div id="warning">Warning: Memory allocation failed!</div>
+    </div>
+
+    <script>
+        let memoryChunks = [];
+        let totalAllocated = 0;
+
+        function allocateMemory() {
+            try {
+                // Create a buffer of 128MB (16 * 1024 * 1024 bytes)
+                const chunk = new Array(16 * 1024 * 1024);
+                // Fill the array with some data to ensure memory is actually allocated
+                for (let i = 0; i < chunk.length; i++) {
+                    chunk[i] = 1;
+                }
+                memoryChunks.push(chunk);
+                totalAllocated += 16;
+                
+                // Update the status display
+                document.getElementById('status').textContent = `Total Memory Allocated: ${totalAllocated} MB`;
+                document.getElementById('warning').style.display = 'none';
+            } catch (error) {
+                console.error('Memory allocation failed:', error);
+                document.getElementById('warning').style.display = 'block';
+                document.getElementById('allocateBtn').disabled = true;
+            }
+        }
+    </script>
+</body>
+</html> 
