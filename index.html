@@ -46,8 +46,8 @@
 <body>
     <div class="container">
         <h1>Memory Allocation Test</h1>
-        <p>Click the button below to allocate 16MB chunks of memory</p>
-        <button id="allocateBtn" onclick="allocateMemory()">Allocate 16MB</button>
+        <p>Click the button below to allocate 64MB chunks of memory</p>
+        <button id="allocateBtn" onclick="allocateMemory()">Allocate 64MB</button>
         <div id="status">Total Memory Allocated: 0 MB</div>
         <div id="warning">Warning: Memory allocation failed!</div>
     </div>
@@ -58,17 +58,16 @@
 
         function allocateMemory() {
             try {
-                // Create a buffer of 128MB (16 * 1024 * 1024 bytes)
                 const chunk = new Array(16 * 1024 * 1024);
                 // Fill the array with some data to ensure memory is actually allocated
                 for (let i = 0; i < chunk.length; i++) {
                     chunk[i] = 1;
                 }
                 memoryChunks.push(chunk);
-                totalAllocated += 16;
+                totalAllocated += 64;
                 
                 // Update the status display
-                document.getElementById('status').textContent = `Total Memory Allocated: ${totalAllocated} MB`;
+                document.getElementById('status').textContent = `Total Memory Allocated: ~${totalAllocated} MB`;
                 document.getElementById('warning').style.display = 'none';
             } catch (error) {
                 console.error('Memory allocation failed:', error);
